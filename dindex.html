@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head >
+		<meta charset="utf-8">
+		<meta name="author" content="cuiyuan edit by yacao" />
+		<meta name="Keywords" content="Music,音乐,音乐播放器"/>
+		<meta name="Description" content="拒绝VIP，白嫖从我们做起"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		
+		<link rel="stylesheet" type="text/css" href="./css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="./css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="./css/index.css"/>
+<link rel="stylesheet" href="css/bootstrap.css">
+        <!-- Bootstrap-Core-CSS -->
+                <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+		<script src="./node_modules/socket.io-client/dist/socket.io.js"></script>
+		<script type="text/javascript" src="./js/selector.js"></script>
+		
+		<title>Music</title>
+	</head>
+	<body oncontextmenu="return false;" onselectstart="return false" >
+<header>
+                <!-- menu -->
+                <ul id="menu">
+                        <li>
+                                <input id="check02" type="checkbox" name="menu" />
+                                <label for="check02"><span class="fa fa-bars" aria-hidden="true"></span></label>
+                                <ul class="submenu">
+                                        <li><a href="login.html" class="active">登录</a></li>
+                                        <li><a href="index.html">歌曲</a></li>
+                                </ul>
+                        </li>
+                </ul>
+                <!-- //menu -->
+        </header>
+		<!--[if lte IE 8]>
+		<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，请 <a href="https://support.dmeng.net/upgrade-your-browser.html" target="_blank">升级浏览器</a> 以获得更好的体验！</p>
+		<![endif]-->
+		
+<textarea name="" id="House 介绍" cols="30" rows="10" style="display: none;">
+
+[00:00.00]暂无歌词
+</textarea>
+<textarea name="" id="Travel to the West" cols="30" rows="10" style="display: none;">
+
+[00:00.00]暂无歌词
+</textarea>
+		<div class="page Opage" >
+			<div class="main">
+				
+				<div class="Rbox r">
+					<h2 class="songName"></h2>
+					<span class="singer"></span>
+					<div class="Lyric"></div>
+				</div>
+			
+			</div>
+			<div class="footer">
+				<div class="main">
+					
+					<div class="l left">
+						<span class="last iconfont icon-kuaitui" title="上一首"></span>&nbsp;&nbsp;
+						<span class="play iconfont Iconfont icon-zanting" title="播放"></span>&nbsp;&nbsp;
+						<span class="next iconfont icon-kuaijin" title="下一首"></span>
+					</div>
+					
+					<div class="content">
+							<span class="realTime">00:00</span><span class="totalTime" style="display: none;"></span>
+					</div>
+					
+					<div class="r right">
+						<div class="list" style="display: none;">
+							<div class="Song"></div>
+						</div>
+						<div class="listTriangle" style="display: none;"></div>
+						<span class="iconfont loop icon-liebiaoxunhuan" title="循环方式"></span>&nbsp;&nbsp;&nbsp;
+						<span class="iconfont icon-liebiao liebiao" title="播放列表" style="font-size: 26px;"></span>&nbsp;&nbsp;&nbsp;
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<audio id="myMusic" src="./music/mp3/1tro_kygo.mp3">
+			您的浏览器不支持 audio 元素。
+		</audio>
+	</body>
+	<script>
+		function get1(key) {
+    let item = localStorage.getItem(key);
+    // 先将拿到的试着进行json转为对象的形式
+    try {
+        item = JSON.parse(item);
+    } catch (error) {
+        // eslint-disable-next-line no-self-assign
+        item = item;
+    }
+    // 如果有startTime的值，说明设置了失效时间
+    if (item && item.startTime) {
+        let date = new Date().getTime();
+        // 如果大于就是过期了，如果小于或等于就还没过期
+        if (date - item.startTime > item.expires) {
+            localStorage.removeItem(key);
+            return false;
+        } else {
+            return item.value;
+        }
+    } else {
+        return item;
+    }
+}
+	</script>
+		<script type="text/javascript" src="./js/scriptb.js"></script>
+</html>

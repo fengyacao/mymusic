@@ -1,0 +1,43 @@
+解析歌词lrc : split() / 正则
+	注 : 
+		innerHTML后将str清空
+获取歌曲时长 : realTime , totalTime ( id.duration , id.currentTime )
+	注 : 
+		在音频就绪后获取，检测是否获取成功，如果NuN自动刷新
+		切歌后重新获取( 添加延时器，否则会NuN )
+歌曲进度条 : onmousedown + onmousemove + event.clientX - offsetLeft + realTime + .style.wight
+	注 : 
+		音乐，歌词，进度条，时间四者同步，改一全改
+		当前时间 / 总时间 = 当前进度条 / 总长度
+		切歌、歌曲播放完毕后重置位置
+		拖动进度条的过程中使音乐静音( id.muted = true )
+		鼠标释放后取消静音
+		否则拖动过程中声音很刺耳
+歌词滚动 : realTime + .style.cssText + offsetTop + scrollTop
+	注 : 
+		通过realTime控制当前歌词样式，清除其他歌词样式
+		通过当前歌词的offsetTop - 容器的offsetTop得到滚动距离
+		切歌、歌曲播放完毕后重置歌词位置
+音量进度条 : onmousedown + onmousemove + event.clientY - offsetTop + volume + .style.height
+播放/暂停 : id.play() / id.pause()
+	注 : 
+		打开定时器之前先清除定时器，防止多开
+上一首/下一首 : id.src
+	注 :
+		打开定时器
+		先暂停音乐，再修改src，再播放音乐
+		重置页面歌词 ，图片，进度条，播放按钮状态
+		因为背景图片是用伪类设置filter: blur();
+		所以不能直接用更换图片src的方式，而是动态的给容器添加一个ID，再修改这个ID的样式就行了
+单曲循环 : id.loop = true;
+	注 : 
+		当realTime >= totalTime-1时进行重置样式
+		如果realTime = totalTime的话，在循环播放模式下样式不会重置
+		/* 播放完毕归位 */
+		if(realTime >= (totalTime-1)){
+			oLyric.scrollTop = 0;
+		}
+随机播放 : index = Math.floor(Math.random() * musics.length);
+		注 : 
+			将音频文件的src 存入数组中
+			.src = musics[index];

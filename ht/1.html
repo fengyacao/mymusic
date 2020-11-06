@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="1.css" />
+<script src="1.js"> </script>
+<meta charset="utf-8">
+<title>中天无线登录界面</title>
+</head>
+<div class="c-top">
+<div class="c-topcen">
+<p class="c-style"><a class="c-style" href="http://www.chinaztt.com/ "target="_blank" >中天科技集团&nbsp</a>|
+<a class="c-style" href="http://www.ztkdjs.com/ "target="_blank" >宽带公司</a></p>
+</div>
+</div>
+<!-- <p><br> &nbsp &nbsp <img border="0" src="log2.png" alt="Pulpit rock" width="80" height="60"></p>
+ --></div>
+
+<div class="c-center">
+
+<!-- </div>
+<div class="c-bottom">
+<p> 地址：南通市如东县河口镇<br><a href="http://www.chinaztt.com/ "target="_blank">中天科技集团</a> <br>
+<a href="http://www.ztkdjs.com/ "target="_blank">宽带公司</a></p>
+</div> -->
+
+<body onload="checkCookie()"> 
+		
+	<div class="c-form">
+
+			<form>
+				<div class="c-log"> 
+				<h1>登录</h1>
+				</div>
+				<div class="c-input">   
+				<input class="c-input1"  id='usr' type="text" name="username" value="用户名" onfocus="if (value =='用户名'){value =''}" onblur="if (value ==''){value='用户名'}" />
+				<br><br>
+				<input class="c-input1"  id='pasw' type="password" name="userpwd" value="****" onfocus="if (value =='****'){value =''}" onblur="if (value ==''){value='****'}" />
+				<br><br>
+				<script type="text/javascript">
+				<!-- username.value= getCookie(username); -->
+				<!-- password.value= getCookie(userpwd); -->
+				</script>
+				<div class="c-input2">
+				<input type="checkbox" id='chkb' name="twohour" value="1">一小时内自动登录<br>
+				</div>
+				
+			    <button class="c-button" type="button" onclick="Login()">登录</button>
+				</div>
+			</form>
+	</div> 
+	
+</body>
+
+</html>

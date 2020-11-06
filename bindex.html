@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head >
+		<meta charset="utf-8">
+		<meta name="author" content="cuiyuan edit by yacao" />
+		<meta name="Keywords" content="Music,音乐,音乐播放器"/>
+		<meta name="Description" content="拒绝VIP，白嫖从我们做起"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		
+		<link rel="stylesheet" type="text/css" href="./css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="./css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="./css/index.css"/>
+		<script src="./node_modules/socket.io-client/dist/socket.io.js"></script>
+		<script type="text/javascript" src="./js/selector.js"></script>
+		
+		<title>Music</title>
+	</head>
+	<body oncontextmenu="return false;" onselectstart="return false" >
+		<!--[if lte IE 8]>
+		<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，请 <a href="https://support.dmeng.net/upgrade-your-browser.html" target="_blank">升级浏览器</a> 以获得更好的体验！</p>
+		<![endif]-->
+		
+<textarea name="" id="1tro" cols="30" rows="10" style="display: none;">
+
+[00:00.00]暂无歌词
+</textarea>
+<textarea name="" id="Don't Leave Me Alone" cols="30" rows="10" style="display: none;">
+[by:WildestMars]
+[00:00.000] 作曲 : Noonie Bao/Linus Wiklund/Sarah Aarons/David Guetta
+[00:07.34]I don't want to lie, can we be honest?我不想说谎 我们能否坦诚相待
+[00:11.08]Right now while you're sitting on my chest现在的你这般焦虑
+[00:14.63]I don't know what I'd do without your comfort没了你的安慰 我不知该如何去做
+[00:17.64]If you really go first if you really left若你真的先我离开 留我孤身一人
+[00:20.99]
+[00:23.22]I don't know if I would be alive today我不知道 我的生活还能否如现在这样继续
+[00:26.08]With or without you like night and day有你相陪或是孤身一人像是日夜交替
+[00:27.98]Read & repeat every conversation重复谈起日复一日的对话
+[00:30.72]Being with you, everyday is a Saturday和你一同 每天都像是周六
+[00:33.52]But every Sunday you've got me praying每每到了周末 你都让我为下周祈祷
+[00:35.84]
+[00:36.42]Don't you ever leave me, don't you ever go你难道不曾离开我 留我孤身一人
+[00:40.14]I've seen it on TV, I know how it goes事情大庭广众发生 我已知道一切
+[00:43.84]Even when you're angry, even when I'm cold即使你勃然大怒 即使我冷寂凄清
+[00:47.63]Don't you ever leave me, don't leave me alone你难道不曾这样离开 请别让我孤身一人
+[00:51.36]Don't leave me a...请别离开我
+[00:52.82]
+[00:52.83]Ah, ah, aloooone孤独寂寞
+[00:56.54]Ah, ah, ha
+[01:00.26]Ah, ah, aloooone这般冷清
+[01:04.03]Ah, ah, ha
+[01:06.01]
+[01:07.30]I don't want to call and you don't answer你故意拒绝应答 我甚至不想与你联系
+[01:10.84]Never see your face light up my phone手机上也从未亮起你的来电
+[01:14.62]Never see you singing tiny dancer也从未见你哼着歌曲 独自起舞的自然模样
+[01:17.66]Everytime my head hurts, everytime I'm low每每我受到伤害 或是处于低谷之中
+[01:21.05]
+[01:23.01]Because I don't know if I would be alive today只因我不知道 我的生活还能否如现在这样继续
+[01:26.01]With or without you like night and day有你相陪或是孤身一人像是日夜交替
+[01:27.90]Everything about you uncomplicated关于你的一切都简单如水
+[01:30.73]Here with you, everyday is a Saturday和你一同 每天都像是周六
+[01:33.59]But every Sunday, you've got me praying每每到了周末 你都让我为下周祈祷
+[01:35.95]
+[01:36.43]Don't you ever leave me, don't you ever go你难道不曾离开我 留我孤身一人
+[01:40.14]I've seen it on TV, I know how it goes事情大庭广众发生 我已知道一切
+[01:43.87]Even when you're angry, even when I'm cold即使你勃然大怒 即使我冷寂凄清
+[01:47.59]Don't you ever leave me, don't leave me alone你难道不曾这样离开 那么就请别再让我孤身一人
+[01:51.37]Don't leave me a...请别离开我
+[01:52.53]
+[01:52.78]Ah, ah, aloooone孤独寂寞
+[01:56.60]Ah, ah, ha
+[02:00.26]Ah, ah, aloooone这般冷清
+[02:03.96]Ah, ah, ha (make me, alo..)(让我这样孤独)
+[02:06.33]
+[02:06.42]Don't you ever leave me你难道不曾离开我
+[02:10.14]Don't you ever go你难道不曾走远
+[02:13.88]Don't you ever leave meeeeee你难道不曾离开我
+[02:19.33]Nooooo, oh不
+[02:20.79]
+[02:21.41]Don't you ever leave me, don't you ever go你难道不曾离开我 留我孤身一人
+[02:25.08]I've seen it on TV, I know how it goes事情大庭广众发生 我已知道一切
+[02:28.83]Even when you're angry, even when I'm cold即使你勃然大怒 即使我冷寂凄清
+[02:32.55]Don't you ever leave me, don't leave me alone你难道不曾这样离开 请别让我孤身一人
+[02:36.26]Don't you ever leave me, don't you ever go你难道不曾离开我 留我孤身一人
+[02:40.03]I've seen it on TV, I know how it goes事情大庭广众发生 我已知道一切
+[02:43.77]Even when you're angry, even when I'm cold即使你勃然大怒 即使我冷寂凄清
+[02:47.46]Don't you ever leave me, don't leave me alone你难道不曾这样离开 请别让我孤身一人
+[02:50.92]
+[02:51.42]Even when you're angry, even when I'm cold即使你勃然大怒 即使我冷寂凄清
+[02:55.18]Don't you ever leave me, don't leave me alone你难道不曾这样离开 那么就请别再让我孤身一人
+</textarea>
+<textarea name="" id="Dreamer" cols="30" rows="10" style="display: none;">
+[by:Trap_Girl]
+[by:吃鱼还是吃梨]
+[00:00.000] 作曲 : Axel Hedfors/Sebastian Ingrosso/Vincent Pontare/Salem Al Fakir/Elog Loelv
+[00:01.000] 作词 : Axel Hedfors/Sebastian Ingrosso/Vincent Pontare/Salem Al Fakir/Elog Loelv
+[00:14.92]Heavy on your heart
+[00:14.92]沉重地压在你心上
+[00:17.23]Heavy on your mind
+[00:17.23]沉重地压抑着你的思想
+[00:19.22]Wandering the streets tonight
+[00:19.22]今夜 徘徊在大街小巷
+[00:22.66]If you're looking for a home
+[00:22.66]若你正在寻觅一个栖身之所
+[00:24.88]You are not alone
+[00:24.88]你并不孤独
+[00:26.80]I can be your guiding light
+[00:26.80]我愿成为你的指引之光
+[00:30.11]'Cause I promise you
+[00:30.11]可以向你保证
+[00:33.76]I'm a dreamer too
+[00:33.76]我也心怀梦想
+[00:37.58]Heavy on my heart
+[00:37.58]我心上负重累累
+[00:40.41]Wandering the streets tonight
+[00:40.41]今夜 徘徊在大街小巷
+[00:46.64]When it all counts for something
+[00:46.64]当意义非凡的未来出现在眼前
+[00:51.03]And your pocket's full of nothing
+[00:51.03]你一无所有
+[00:54.61]Let's get high on believing
+[00:54.61]让我们满腔热情地信仰
+[00:57.49]I can promise you
+[00:57.49]我对你承诺
+[00:59.15]Yes, I am a dreamer too
+[00:59.15]我也心怀梦想
+[01:02.37]We are dreamers together
+[01:02.37]你我同行 追逐梦想
+[01:06.94]Always and forever
+[01:06.94]直到永远
+[01:09.93]Let's get high on believing
+[01:09.93]让我们满腔热情地信仰
+[01:12.76]I can promise you
+[01:12.76]我对你承诺
+[01:14.50]Yes, I am a dreamer too
+[01:14.50]没错 我也心怀梦想
+[01:27.67]I can promise you
+[01:27.67]我对你承诺
+[01:29.71]Yes, I am a dreamer too
+[01:29.71]没错 我也心怀梦想
+[01:39.81]Let's get high on believing
+[01:39.81]让我们满腔热情地信仰
+[01:43.24]I can promise you
+[01:43.24]我对你承诺
+[01:44.91]Yes, I am a dreamer too
+[01:44.91]没错 我也心怀梦想
+[01:54.83]Heavy on my feet
+[01:54.83]脚下沉重不已
+[01:56.26]Heavy on my knees
+[01:56.26]双膝也倍感压力
+[01:58.28]Walking down a winding road
+[01:58.28]行走在曲折的路上
+[02:01.51]If you're looking for a home
+[02:01.51]若你正在寻觅一个栖身之所
+[02:04.04]You are not alone
+[02:04.04]你并不孤独
+[02:05.83]I can be your stepping stone
+[02:05.83]我愿成为你前进路上的跳板
+[02:09.18]'Cause I promise you
+[02:09.18]我对你承诺
+[02:12.78]I'm a dreamer too
+[02:12.78]没错 我也心怀梦想
+[02:16.49]Heavy on my feet
+[02:16.49]脚下沉重不已
+[02:19.05]Walking down a winding road
+[02:19.05]行走在曲折的路上
+[02:23.93]When it all counts for something
+[02:23.93]当意义非凡的未来出现
+[02:30.07]And your pocket's full of loving
+[02:30.07]你一无所有
+[02:33.75]Let's get high on believing
+[02:33.75]让我们满腔热情地信仰
+[02:36.53]I can promise you
+[02:36.53]我对你承诺
+[02:38.24]Yes, I am a dreamer too
+[02:38.24]没错 我也心怀梦想
+[02:41.43]We are dreamers together
+[02:41.43]你我同行 追逐梦想
+[02:45.91]Always and forever
+[02:45.91]直到永远
+[02:48.85]Let's get high on believing
+[02:48.85]让我们满腔热情地信仰
+[02:51.94]I can promise you
+[02:51.94]向你承诺
+[02:53.42]Yes, I am a dreamer too
+[02:53.42]没错 我也心怀梦想
+[02:58.57]I can promise you, I can promise you
+[02:58.57]我向你许诺 向你许诺
+[03:03.09]I can promise you, I can promise you
+[03:03.09]我对你承诺 对你承诺
+[03:06.78]I can promise you, I can promise you
+[03:06.78]我向你许诺 向你许诺
+[03:10.59]I can promise you, I can promise you
+[03:10.59]我对你承诺 对你承诺
+[03:14.39]I can promise you, I can promise you
+[03:14.39]我向你许诺 向你许诺
+[03:18.23]I can promise you, I can promise you
+[03:18.23]我对你承诺 对你承诺
+[03:21.97]I can promise you
+[03:21.97]我向你许诺
+[03:23.94]Yes I am a dreamer too
+[03:23.94]我也心怀梦想
+[03:36.18]I can promise you
+[03:36.18]向你承诺
+[03:39.16]Yes I am a dreamer too
+[03:39.16]没错 我也心怀梦想
+[03:42.47]We are dreamers together
+[03:42.47]我们是同路的逐梦之人
+[03:46.94]Always and forever
+[03:46.94]直到永远
+[03:49.92]Let's get high on believing
+[03:49.92]让我们满腔热情地信仰
+[03:52.94]I can promise you
+[03:52.94]对你许下承诺
+[03:54.50]Yes I am a dreamer too
+[03:54.50]没错 我也心怀梦想
+</textarea>
+<textarea name="" id="Feeling Good" cols="30" rows="10" style="display: none;">
+[by:thisislydia]
+[00:08.220]Birds flying high you know how I feel鸟在高飞 你知道我什么感觉
+[00:19.930]Sun in the sky you know how I feel艳阳高照 你知道我什么感觉
+[00:28.590]Reeds driftin on by you know how I feel芦苇漂浮 你知道我什么感觉
+[00:37.420]Its a new dawn天空破晓
+[00:40.430]Its a new day又是一天
+[00:43.460]Its new a life新的生活
+[00:48.590]For me我的生活
+[00:54.680]And Im feeling good这感觉真好
+[01:12.820]Fish in the sea you know how I feel游鱼在海 你知道我什么感觉
+[01:20.100]River running free you know how I feel河溪奔流 你知道我什么感觉
+[01:27.080]Blossom on the tree you know how I feel繁花盛放 你知道我什么感觉
+[01:33.250]Its a new dawn天空破晓
+[01:34.870]Its a new day又是一天
+[01:36.460]Its a new life新的生活
+[01:39.770]For me我的生活
+[01:41.890]And Im feeling good这感觉真好
+[02:06.740]Dragonfly out in the sun you know what I mean, dont you know艳阳下的蜻蜓在飞 你知道我的意思
+[02:14.880]Butterflies all havin fun you know what I mean蝴蝶飞舞 你知道我的意思
+[02:21.120]Sleep in peace when day is done一天结束后就安静熟睡
+[02:24.920]Thats what I mean这就是我想说的
+[02:27.450]And this old world is a new world旧的世界迎来新的世界
+[02:30.670]And a bold world一个放肆的世界
+[02:33.530]For me我的世界
+[02:38.890]Stars when you shine you know how I feel当你闪闪发亮时 你知道我什么感觉
+[02:45.710]Scent of the pine you know how I feel闻着松香 你知道我什么感觉
+[02:52.160]Oh freedom is mine自由属于我
+[02:56.890]And I know how I feel我知道我的感觉
+[02:59.840]Its a new dawn天空破晓
+[03:01.330]Its a new day又是一天
+[03:03.190]Its a new life新的生活
+[03:04.540]For me我的生活
+[03:06.910]Its a new dawn天空破晓
+[03:08.420]Its a new day又是一天
+[03:10.200]Its a new life新的生活
+[03:12.090]For me我的生活
+[03:15.440]And Im feeling good这感觉真好
+</textarea>
+<textarea name="" id="House 介绍" cols="30" rows="10" style="display: none;">
+
+[00:00.00]暂无歌词
+</textarea>
+<textarea name="" id="Love Shouldnt Be So Hard" cols="30" rows="10" style="display: none;">
+[by:EnderCrafter]
+[00:02.40]
+[00:12.96]Open eyes你睁开
+[00:14.61]It's crystal clear we lost our shine水晶般澄澈的双眸 一瞬间竟掩住了你我的光彩
+[00:19.09]You & I你与我
+[00:21.53]We're going down nowhere to hide四处闯荡 无处躲藏
+[00:25.32]tell me why告诉我为何
+[00:27.66]you're trying so hard to save us你还要竭力挽留这已断的情愫
+[00:30.59]we can't survive你我早已无法拯救
+[00:33.84]you & I你和我
+[00:37.12]
+[00:37.72]We're a flame we're a flame我们如那熊熊烈火
+[00:40.01]No oxygen to keep us alive却无氧气供你我继续维持这般炽热
+[00:43.25]It's a shame it's a shame可惜啊 遗憾啊
+[00:46.19]But the truth ain't gonna lie lie lie真理不说谎言
+[00:49.68]
+[00:50.03]We're only happy sitting in the silence唯有安静地坐在彼此身边 才觉欢欣喜悦
+[00:52.52]We only **** after we finish fighting只在你我纠缠不休之后 便诉满腔情愿
+[00:55.80]Nothing comes easy世事总不是简简单单就能对付
+[00:58.45]But love shouldn't be so hard babe但爱总不该如此艰难辛苦
+[01:01.98]
+[01:02.48]I'm not saying we have to be flawless并不是说我们一定要完美无瑕的
+[01:05.18]But we're so far gone just being honest但就算是对彼此坦诚一切 却也难再实现
+[01:08.07]Nothing comes easy世事总不是简简单单就能对付
+[01:11.05]But love shouldn't be so hard babe但爱总不该如此艰难辛苦
+[01:14.20]
+[01:24.10]love shouldn't be so hard babe爱总不该如此艰难辛苦
+[01:39.40]
+[01:40.00]Up hill climb我们爬上小丘
+[01:42.33]We're losing breath大口大口地喘着气
+[01:43.93]But scared to leave却惧怕将曾经的一切
+[01:45.93]this behind就这样抛弃扔走
+[01:48.22]I got so used to you next to me我是多么习惯你陪伴着我的每时每刻
+[01:51.71]It ain't right不对啊
+[01:54.35]You're trying so hard to save us你明明那般努力的想要挽救
+[01:57.44]We got one life let's not deny that这一生的诺言 让你我别再否决
+[02:03.12]
+[02:04.42]We're a flame we're a flame我们如那熊熊烈火
+[02:06.76]No oxygen to keep us alive却无氧气供你我继续维持这般炽热
+[02:09.89]It's a shame it's a shame可惜啊 遗憾啊
+[02:12.79]But the truth ain't gonna lie lie lie真理不说谎言
+[02:16.32]
+[02:16.72]We're only happy sitting in the silence唯有安静地坐在彼此身边 才觉欢欣喜悦
+[02:19.32]We only **** after we finish fighting只在你我纠缠不休之后 便诉满腔情愿
+[02:22.60]Nothing comes easy世事总不是简简单单就能对付
+[02:25.15]But love shouldn't be so hard babe但爱总不该如此艰难辛苦
+[02:28.48]
+[02:29.18]I'm not saying we have to be flawless并不是说我们一定要完美无瑕的
+[02:31.62]But we're so far gone just being honest但就算是对彼此坦诚一切 却也难再实现
+[02:34.61]Nothing comes easy世事总不是简简单单就能对付
+[02:37.60]But love shouldn't be so hard babe但爱总不该如此艰难辛苦
+[02:44.13]
+[02:50.50]love shouldn't be so hard babe爱总不该如此艰难辛苦
+</textarea>
+<textarea name="" id="Miami82" cols="30" rows="10" style="display: none;">
+[00:34.33]Oh,喔~
+[00:36.16]How quickly I come undone,很快我就要GG思密达了啊
+[00:40.35]Like melting ice on the sun,如同烈日下的融冰
+[00:44.59]Why would that stop when I'm falling free,在我即将投入自由怀抱之时 这感觉为何转瞬即逝
+[00:49.11]Midnight daydream,像一段午夜的遐想
+[00:51.28]Oh,喔~
+[00:53.14]You watch me and I'm exposed,你注视着我 我无处可藏
+[00:57.39]Like lightning bolts in my bones,内心似乎有触电的快感
+[01:01.59]Why would that stop when I'm falling free,在我即将投入自由怀抱之时 这感觉为何转瞬即逝
+[01:06.11]Midnight daydream,像一段午夜的遐想
+[01:40.16]Midnight daydream,像一段午夜的遐想
+[02:50.29]Oh,喔~
+[02:52.14]How quickly I come undone,很快我就要GG思密达了啊
+[02:56.28]Like melting ice on the sun,如同烈日下的融冰
+[03:00.54]Why would that stop when I'm falling free,在我即将投入自由怀抱之时 这感觉为何转瞬即逝
+[03:05.03]Midnight daydream,像一段午夜的遐想
+[03:07.23]Oh,喔~
+[03:09.09]You watch me and I'm explode,你注视着我 我无处可藏
+[03:13.25]Like lightning bolts in my bones,内心似乎有触电的快感
+[03:17.52]Why would that stop when I'm falling free,在我即将投入自由怀抱之时 这感觉为何转瞬即逝
+[03:22.05]Midnight daydream,像一段午夜的遐想
+[03:56.10]Midnight daydream,像一段午夜的遐想
+</textarea>
+<textarea name="" id="Pray" cols="30" rows="10" style="display: none;">
+[00:00.052] Pray
+[00:05.322] Pray
+[00:12.208] Give me your heart, give me your soul
+[00:17.799] Show me where you wanna go
+[00:22.052] And now I'm craving
+[00:27.142] For your love I’m caving in
+[00:33.186] But how you gonna leave me now
+[00:35.673] Just throw it away
+[00:37.171] All my tears are falling
+[00:39.413] I will
+[00:40.542] Pray
+[00:44.023] I thought I'd leave you
+[00:46.171] But I will stay
+[00:49.913] Never gonna run away
+[00:51.786] Eh eh, eh eh
+[00:53.328] Eh eh, eh eh
+[00:55.550] Every time you call my name
+[00:57.632] I will pray
+[01:01.898] Pray
+[01:06.638] I thought I'd leave you
+[01:12.360] Never gonna run away
+[01:14.462] Eh eh, eh eh
+[01:18.100] Every time you call my name
+[01:20.303] I will pray
+[01:26.032] They say, calm, calm the storms
+[01:31.535] Something we can’t find at all
+[01:35.338] And now I'm craving
+[01:40.561] For your love I'm caving in
+[01:46.906] But how you gonna leave me now
+[01:49.029] Just throw it away
+[01:50.487] All my tears are falling
+[01:52.778] I will
+[01:53.957] Pray
+[01:57.567] I thought I'd leave you
+[01:59.534] But I will stay
+[02:03.217] Never gonna run away
+[02:05.386] Eh eh, eh eh
+[02:06.667] Eh eh, eh eh
+[02:08.974] Every time you call my name
+[02:11.044] I will pray
+[02:15.429] Pray
+[02:20.060] I thought I'd leave you
+[02:25.873] Never gonna run away
+[02:27.974] Eh eh, eh eh
+[02:29.207] Eh eh, eh eh
+[02:31.572] Every time you call my name
+[02:33.666] I will pray
+[02:37.904] Pray
+[02:43.614] Pray
+</textarea>
+<textarea name="" id="THE LUDLOWS" cols="30" rows="10" style="display: none;">
+
+[00:00.00]暂无歌词
+</textarea>
+<textarea name="" id="Travel to the West" cols="30" rows="10" style="display: none;">
+
+[00:00.00]暂无歌词
+</textarea>
+<textarea name="" id="过招" cols="30" rows="10" style="display: none;">
+[ti:过招]
+[ar:蔡恩雨]
+[al:过招]
+[by:v_yyccchen]
+[offset:0]
+[00:00.00]过招 - 蔡恩雨
+[00:00.11]词Lyric：易岚
+[00:00.19]曲Composed：7Key-ONCE
+[00:00.24]编曲Arrangement:  7Key-ONCE
+[00:00.34]制作人Producer：7Key-TG（朴太光）
+[00:00.49]和声Backing Vocal：金辉/蔡恩雨
+[00:00.68]混音师Mixng Engineer：极泷
+[00:00.81]母带工程师Mastering：极泷
+[00:01.57]tik tik tak
+[00:03.01]as the passing water never flows backwards
+[00:06.86]tik tak
+[00:08.35]I still gotta work hard to catch up forwards
+[00:11.97]Duludududu duludududu
+[00:17.49]Duludududu ho
+[00:23.00]倔强的性格
+[00:25.46]天生有着反骨的姿态
+[00:28.44]缺席了掌声
+[00:30.87]汗水也让人淋漓畅快
+[00:34.12]小小的意外不算失败
+[00:36.48]命运 恃强凌弱 也不退缩
+[00:39.84]我不要再多猜猜猜
+[00:41.99]想太多不如去做一个行动派 诶
+[00:45.31]也忘了有多久 没有肆无忌惮的大笑
+[00:50.41]人群越热闹 我就感觉越寂寥
+[00:55.64]谁没走过黑暗的泥沼
+[00:58.65]谁没经过人生的低潮
+[01:01.15]勇敢尝试不同的味道
+[01:04.14]才值得更美好
+[01:06.98]回头去看让走过
+[01:09.62]的路成为自己的骄傲
+[01:12.22]听着风啸戏谑的嘲笑
+[01:15.13]越是渴望云霄
+[01:18.26]Life Goes On
+[01:19.81]谁在恶意嘲笑
+[01:21.42]Life Goes On
+[01:22.62]不会被谁打倒
+[01:24.44]Life Goes On Life Goes On
+[01:26.02]我要全力和所有的障碍过招
+[01:30.31]Duludududu duludududu
+[01:34.66]我们像被囚禁的困兽 梦不到尽头
+[01:40.27]小小的意外不算失败
+[01:42.68]命运 恃强凌弱 也不退缩
+[01:46.18]我不要再多猜猜猜
+[01:48.20]想太多不如去做一个行动派 诶
+[01:51.75]也忘了有多久 没有肆无忌惮的大笑
+[01:56.66]人群越热闹 我就感觉越寂寥
+[02:01.90]谁没走过黑暗的泥沼
+[02:04.71]谁没经过人生的低潮
+[02:07.38]勇敢尝试不同的味道
+[02:10.26]才值得更美好
+[02:13.15]回头去看让走过
+[02:15.60]的路成为自己的骄傲
+[02:18.43]听着风啸戏谑的嘲笑
+[02:21.32]越是渴望云霄
+[02:24.43]Life Goes On
+[02:26.04]谁在恶意嘲笑
+[02:27.59]Life Goes On
+[02:28.72]不会被谁打倒
+[02:30.31]Life Goes On Life Goes On
+[02:32.01]我要全力去和所有的障碍过招
+[02:35.59]Duludududu duludududu
+[02:40.85]我们像被囚禁的困兽 梦不到尽头
+[03:08.29]谁没走过黑暗的泥沼
+[03:10.88]谁没经过人生的低潮
+[03:13.57]勇敢尝试不同的味道
+[03:16.42]才值得更美好
+[03:19.61]旅途中偶尔孤独也要演绎出优雅腔调
+[03:24.60]每一天变更好散发光芒宇宙中闪耀
+[03:31.25]Life Goes On
+[03:32.27]谁在恶意嘲笑
+[03:33.68]Life Goes On
+[03:34.87]不会被谁打倒
+[03:36.34]Life Goes On Life Goes On
+[03:38.41]我要全力和所有的障碍过招
+[03:42.58]Duludududu duludududu
+[03:46.96]我们像被囚禁的困兽
+[03:50.06]梦不到尽头
+</textarea>
+<textarea name="" id="靜悄悄" cols="30" rows="10" style="display: none;">
+[by:太滚妮呀]
+[00:17.04]最想要看到 是你的微笑
+[00:20.67]在我的眼中 你是最好
+[00:23.94]肉麻的调调 你不会知道
+[00:27.88]我爱的静悄悄
+[00:31.24]我该怎么往下聊
+[00:33.10]全都怪我太胆小
+[00:35.01]只会看着你傻笑
+[00:36.75]怎么办才好
+[00:38.51]可我真的没有想到
+[00:40.36]你把我拥入怀抱
+[00:45.79]世界突然变得好安静
+[00:49.33]只剩心跳的声音
+[00:53.03]坚定了我爱你的决心
+[00:56.70]此刻你就是唯一
+[00:60.29]世界突然变得好安静
+[01:03.83]不敢用力的呼吸
+[01:06.95]因为我害怕这是梦境
+[01:11.39]不小心会惊醒
+[01:15.42]
+[01:18.99]最想要看到 是你的微笑
+[01:22.58]在我的眼中 你是最好
+[01:25.55]肉麻的调调 你不会知道
+[01:29.23]我爱的静悄悄
+[01:33.10]我该怎么往下聊
+[01:34.84]全都怪我太胆小
+[01:36.98]只会看着你傻笑
+[01:38.65]怎么办才好
+[01:40.31]可我真的没有想到
+[01:42.15]你把我拥入怀抱
+[01:47.66]世界突然变得好安静
+[01:51.01]只剩心跳的声音
+[01:54.88]坚定了我爱你的决心
+[01:58.40]此刻你就是唯一
+[02:02.10]世界突然变得好安静
+[02:05.71]不敢用力的呼吸
+[02:08.79]因为我害怕这是梦境
+[02:13.24]不小心会惊醒
+[02:16.83]世界突然变得好安静
+[02:20.14]只剩心跳的声音
+[02:21.71]坚定了我爱你的决心
+[02:27.33]此刻你就是唯一
+[02:31.11]世界突然变得好安静
+[02:34.48]不敢用力的呼吸
+[02:37.61]因为我害怕这是梦境
+[02:42.24]不小心会惊醒
+</textarea>
+<textarea name="" id="飞鸟和蝉" cols="30" rows="10" style="display: none;">
+[ti:飞鸟和蝉]
+[ar:任然]
+[al:飞鸟和蝉]
+[by:]
+[offset:0]
+[00:00.25]飞鸟和蝉 - 任然
+[00:02.16]词：耕耕
+[00:03.03]曲：Kent王健
+[00:04.07]编曲：侯江浩
+[00:05.46]吉他：陈麒元
+[00:06.80]混音：张栩赫（Ethan）
+[00:08.27]录音：Kent王健
+[00:09.55]和声编写/和声：Kent王健
+[00:11.99]制作人：Kent王健
+[00:12.66]配唱制作人：kent王健
+[00:12.92]录音工作室：1803 Studio
+[00:13.81]混音工作室：Hot Music Studio
+[00:14.07]监制：三千
+[00:14.21]OP：千和世纪
+[00:15.01]（版权所有未经许可请勿使用）
+[00:29.59]你说青涩最搭初恋
+[00:36.17]如小雪落下海岸线
+[00:42.34]第五个季节某一天上演
+[00:49.10]我们有相遇的时间
+[00:55.56]你说空瓶适合许愿
+[01:01.90]在风暖月光的地点
+[01:08.38]第十三月你就如期出现
+[01:14.92]海之角也不再遥远
+[01:22.79]你骄傲的飞远 我栖息的夏天
+[01:29.19]听不见的宣言 重复过很多年
+[01:35.67]北纬线的思念被季风吹远
+[01:40.55]吹远默念的侧脸
+[01:44.19]吹远鸣唱的诗篇
+[01:48.74]你骄傲的飞远 我栖息的叶片
+[01:55.20]去不同的世界 却从不曾告别
+[02:01.73]沧海月的想念羽化我昨天
+[02:06.63]在我成熟的笑脸
+[02:10.16]你却未看过一眼
+[02:29.48]你说空瓶适合许愿
+[02:35.95]在风暖月光的地点
+[02:42.27]第十三月你就如期出现
+[02:48.82]海之角也不再遥远
+[02:53.66]你骄傲的飞远 我栖息的夏天
+[02:59.85]听不见的宣言 重复过很多年
+[03:06.48]北纬线的思念被季风吹远
+[03:11.34]吹远默念的侧脸
+[03:14.95]吹远鸣唱的诗篇
+[03:19.43]你骄傲的飞远 我栖息的叶片
+[03:25.98]去不同的世界 却从不曾告别
+[03:32.47]沧海月的想念羽化我昨天
+[03:37.33]在我成熟的笑脸
+[03:40.98]你却未看过一眼
+[03:45.36]你骄傲的飞远 我栖息的夏天
+[03:51.89]听不见的宣言 重复过很多年
+[03:58.47]北纬线的思念被季风吹远
+[04:03.30]吹远默念的侧脸
+[04:06.92]吹远鸣唱的诗篇
+[04:11.30]你骄傲的飞远 我栖息的叶片
+[04:17.74]去不同的世界 却从不曾告别
+[04:24.39]沧海月的想念羽化我昨天
+[04:29.24]在我成熟的笑脸
+[04:32.88]你却未看过一眼
+</textarea>
+		<div class="page Opage" >
+			<div class="main">
+				
+				<div class="Rbox r">
+					<h2 class="songName"></h2>
+					<span class="singer"></span>
+					<div class="Lyric"></div>
+				</div>
+			
+			</div>
+			<div class="footer">
+				<div class="main">
+					
+					<div class="l left">
+						<span class="last iconfont icon-kuaitui" title="上一首"></span>&nbsp;&nbsp;
+						<span class="play iconfont Iconfont icon-zanting" title="播放"></span>&nbsp;&nbsp;
+						<span class="next iconfont icon-kuaijin" title="下一首"></span>
+					</div>
+					
+					<div class="content">
+							<span class="realTime">00:00</span><span class="totalTime" style="display: none;"></span>
+					</div>
+					
+					<div class="r right">
+						<div class="list" style="display: none;">
+							<div class="Song"></div>
+						</div>
+						<div class="listTriangle" style="display: none;"></div>
+						<span class="iconfont loop icon-liebiaoxunhuan" title="循环方式"></span>&nbsp;&nbsp;&nbsp;
+						<span class="iconfont icon-liebiao liebiao" title="播放列表" style="font-size: 26px;"></span>&nbsp;&nbsp;&nbsp;
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<audio id="myMusic" src="./music/mp3/1tro_kygo.mp3">
+			您的浏览器不支持 audio 元素。
+		</audio>
+	</body>
+	<script>
+		function get1(key) {
+    let item = localStorage.getItem(key);
+    // 先将拿到的试着进行json转为对象的形式
+    try {
+        item = JSON.parse(item);
+    } catch (error) {
+        // eslint-disable-next-line no-self-assign
+        item = item;
+    }
+    // 如果有startTime的值，说明设置了失效时间
+    if (item && item.startTime) {
+        let date = new Date().getTime();
+        // 如果大于就是过期了，如果小于或等于就还没过期
+        if (date - item.startTime > item.expires) {
+            localStorage.removeItem(key);
+            return false;
+        } else {
+            return item.value;
+        }
+    } else {
+        return item;
+    }
+}
+	</script>
+		<script type="text/javascript" src="./js/script.js"></script>
+</html>
