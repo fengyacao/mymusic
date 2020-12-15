@@ -4,8 +4,8 @@ window.onload = function(){
 		return (n <10) ? ("0" + n) : (n);
 	}
 	/* 储存信息 */
-var songName=["House 介绍","Travel to the West"]
-var singers=["givadivas","doctor bao"]
+var songName=["House 介绍","The Lord of the Rings","Travel to the West"]
+var singers=["givadivas","doctor bao","doctor bao"]
 	/* 动态插入css代码片段 */
 	var head = $('head')[0];
 	var songlenth=songName.length;
@@ -48,6 +48,36 @@ if(uin=="yacao"||uin=="guest")
 		}
 		head.appendChild(style);
 	}
+	var odiv=document.getElementById("mydiv");
+	var obar=document.getElementById("mybar");
+	var obg=document.getElementById("mybg");
+	var otext=document.getElementById("mytext");
+	var kuan = odiv.clientWidth;
+	var leftmine=0;
+	obg.onclick=function (e){
+		console.log("ok");
+		leftmine = e.pageX +"px";
+		console.log(leftmine);
+		obar.style.width = leftmine;
+		realTime = parseInt((e.pageX*totalTime)/kuan);
+		realMinute = doubleNum(parseInt(realTime/60));
+		realSecond = doubleNum(realTime%60);
+		oRealTime = $(".realTime")[0];
+		myMusic.currentTime = realTime;
+		oRealTime.innerHTML = realMinute + ":" + realSecond;
+	}
+	obar.onclick=function (e){
+		console.log("ok");
+		leftmine = e.pageX +"px";
+		console.log(leftmine);
+		obar.style.width = leftmine;
+		realTime = parseInt((e.pageX*totalTime)/kuan);
+		realMinute = doubleNum(parseInt(realTime/60));
+		realSecond = doubleNum(realTime%60);
+		oRealTime = $(".realTime")[0];
+		myMusic.currentTime = realTime;
+		oRealTime.innerHTML = realMinute + ":" + realSecond;
+	}
 	/* 定时器 */
 	function oTimer(){
 		real = setInterval( function(){
@@ -56,6 +86,8 @@ if(uin=="yacao"||uin=="guest")
 			realSecond = doubleNum(realTime%60);
 			oRealTime.innerHTML = realMinute + ":" + realSecond;
 			left = (realTime*400)/totalTime;
+			leftmine = (realTime*kuan)/totalTime;
+			obar.style.width = leftmine  + "px";
 			if(myMusic.ended){
 				Play = false;
 				oPaly.className = "play iconfont Iconfont icon-zanting";
@@ -106,7 +138,10 @@ if( Num ==2 ){
 		oPaly.title = "暂停";
 		/* 延时获取totalTime */
 		setTimeout( function(){
+myMusic.addEventListener("canplay", function() {
+				console.log(parseInt(myMusic.duration));
 				totalTime = parseInt(myMusic.duration);
+			});
 			realTime = parseInt(myMusic.currentTime);
 			totalMinute = doubleNum(parseInt(totalTime/60));
 			totalSecond = doubleNum(totalTime%60);
@@ -142,7 +177,10 @@ if( Num ==2 ){
 		oPaly.title = "暂停";
 		/* 延时获取totalTime */
 		setTimeout( function(){
+myMusic.addEventListener("canplay", function() {
+				console.log(parseInt(myMusic.duration));
 				totalTime = parseInt(myMusic.duration);
+			});
 			realTime = parseInt(myMusic.currentTime);
 			totalMinute = doubleNum(parseInt(totalTime/60));
 			totalSecond = doubleNum(totalTime%60);
@@ -186,7 +224,10 @@ if( Num ==2 ){
 	var oTotalTime;
 	/* 确保获取成功 */
 	setTimeout( function(){
-			totalTime = parseInt(myMusic.duration);
+myMusic.addEventListener("canplay", function() {
+				console.log(parseInt(myMusic.duration));
+				totalTime = parseInt(myMusic.duration);
+			});
 		totalMinute = doubleNum(parseInt(totalTime/60));
 		totalSecond = doubleNum(totalTime%60);
 		oTotalTime = $(".totalTime")[0];
@@ -240,7 +281,10 @@ if( Num ==2 ){
 			oPaly.title = "暂停";
 			/* 延时获取totalTime */
 			setTimeout( function(){
-					totalTime = parseInt(myMusic.duration);
+myMusic.addEventListener("canplay", function() {
+				console.log(parseInt(myMusic.duration));
+				totalTime = parseInt(myMusic.duration);
+			});
 				realTime = parseInt(myMusic.currentTime);
 				totalMinute = doubleNum(parseInt(totalTime/60));
 				totalSecond = doubleNum(totalTime%60);
@@ -300,13 +344,9 @@ if( Num ==2 ){
 		oPaly.title = "暂停";
 		/* 延时获取totalTime */
 		setTimeout( function(){
-/*			if(myMusic.readyState == 4){ */
+myMusic.addEventListener("canplay", function() {				console.log(parseInt(myMusic.duration));
 				totalTime = parseInt(myMusic.duration);
-/*			}else{
-				location.reload();
-				alert("信息获取错误，自动刷新页面")
-			}  */
-			realTime = parseInt(myMusic.currentTime);
+			});			realTime = parseInt(myMusic.currentTime);
 			totalMinute = doubleNum(parseInt(totalTime/60));
 			totalSecond = doubleNum(totalTime%60);
 			left = 0;
