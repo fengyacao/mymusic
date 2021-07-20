@@ -31,7 +31,6 @@ sed -i '/var singers/ s/$/]/' /var/www/html/js/script.js
 
 
 
-#! /usr/bin/sh
 sed -i '7d' /var/www/html/js/scriptb.js
 sed -i '6a var songName=[' /var/www/html/js/scriptb.js
 #files=$(ls $path)

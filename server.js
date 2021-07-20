@@ -4,8 +4,28 @@ var express = require('express');
 var sio = require('socket.io');
 var connectDB = require("./connectDB.js");
 var app = express();
+var config=require("./config");
+var crypto=require("crypto");
 app.disable('etag');
 //app.use(express.static(__dirname + ''));//设置静态路由
+app.get("/wx",function(req,res){
+	var timestamp=req.query.timestamp;
+	var signature=req.query.signature;
+	var nonce=req.query.nonce;
+	var echostr=req.query.echostr;
+
+	var array=[config.token,timestamp,nonce];
+	array.sort();
+	var temstr=array.join('');
+	const hashcode=crypto.createHash('sha1');
+	var rescode=hashcode.update(temstr,'utf8').digest('hex');
+	
+	if(rescode == signature){
+		res.send(echostr);
+	}else{
+		res.send('mismatch');
+	}
+})
 app.use(express.static(__dirname + ''));//设置静态路由
 //app.use(express.static(__dirname + './index.html'));//设置静态路由
 var server = http.createServer(app);

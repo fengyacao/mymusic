@@ -4,8 +4,8 @@ window.onload = function(){
 		return (n <10) ? ("0" + n) : (n);
 	}
 	/* 储存信息 */
-var songName=["House 介绍","The Lord of the Rings","Travel to the West"]
-var singers=["givadivas","doctor bao","doctor bao"]
+var songName=["The Lord of the Rings","Travel to the West"]
+var singers=["doctor bao","doctor bao"]
 	/* 动态插入css代码片段 */
 	var head = $('head')[0];
 	var songlenth=songName.length;
@@ -491,9 +491,18 @@ var updateData = {
 
 }//记录表格中数值变化的对象，暂且只记录一行数据的变化，修改操作使用的对象
 
+var t=new Date();
+var month=t.getMonth()+1;
+var day=t.getDate();
+var hour=t.getHours();
+var minute=t.getMinutes();
+var seconds=t.getSeconds();
+var showtime=month + "/" + day+ "-" + hour+ ":" + minute+ ":" + seconds;
+
 function updatedb()
 {
 	updateData.updateValues['radionum'] = I;
+	updateData.updateValues['logintime'] = showtime;
 	updateData.condition['name'] = uin;
 	socket.emit('sendDataToServer', updateData);//向服务器发送数据
     updateData.condition = {};//把这个全局变量变成原来的样子

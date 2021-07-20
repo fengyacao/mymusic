@@ -4,8 +4,8 @@ window.onload = function(){
 		return (n <10) ? ("0" + n) : (n);
 	}
 	/* 储存信息 */
-var songName=["1tro","Don't Leave Me Alone","Dreamer","Feeling Good","Love Shouldnt Be So Hard","Miami82","ocean eyes","Pray","THE LUDLOWS","情非得已","过招","靜悄悄","飞鸟和蝉"]
-var singers=["kygo","David Guetta feat Anne-Marie","Axwell-Ingrosso","Avicii","CARTA","kygoRemix","potato","Alok","LEGENDS OF THE FALL","rouze,Sam Feldt,何维健","蔡恩雨","蔡恩雨","任然(Cover 蔡恩雨)"]
+var songName=["1tro","Best of 2020","Don't Leave Me Alone","Dreamer","Everything I Need and Nightlight","Feeling Good","Love Shouldnt Be So Hard","May it be","Miami82","Pray","Waytoyou","ysgqc","情非得已","靜悄悄"]
+var singers=["kygo","summer sounds","David Guetta feat Anne-Marie","Axwell-Ingrosso","VA","Avicii","CARTA","enya","kygoRemix","Alok","Gareth","sj","rouze,Sam Feldt,何维健","蔡恩雨"]
 	/* 动态插入css代码片段 */
 	var head = $('head')[0];
 	var songlenth=songName.length;
@@ -127,9 +127,9 @@ if( Num ==2 ){
 }
 		if($("#style") != null){
 			head.removeChild(style);
-			loadCssCode(`.Opage::before{ position: absolute; top: 0; left: 0; right: 0; bottom: 0; margin: -30px; z-index: -1; content: ''; background: url(./img/${SongName1[I]}_${Singers1[I]}.jpg) no-repeat; background-size:100% 100%; filter: blur(20px); }`);
+			loadCssCode(`.Opage::before{ position: absolute; top: 0; left: 0; right: 0; bottom: 0; margin: -30px; z-index: -1; content: ''; background: url(../img/${SongName1[I]}_${Singers1[I]}.jpg) no-repeat; background-size:100% 100%; filter: blur(20px); }`);
 		}else{
-			loadCssCode(`.Opage::before{ position: absolute; top: 0; left: 0; right: 0; bottom: 0; margin: -30px; z-index: -1; content: ''; background: url(./img/${SongName1[I]}_${Singers1[I]}.jpg) no-repeat; background-size:100% 100%; filter: blur(20px); }`);
+			loadCssCode(`.Opage::before{ position: absolute; top: 0; left: 0; right: 0; bottom: 0; margin: -30px; z-index: -1; content: ''; background: url(../img/${SongName1[I]}_${Singers1[I]}.jpg) no-repeat; background-size:100% 100%; filter: blur(20px); }`);
 		}
 		myMusic.pause();
 		myMusic.src = `./music/mp3/${songName[I]}_${singers[I]}.mp3`;
@@ -493,9 +493,18 @@ var updateData = {
 
 }//记录表格中数值变化的对象，暂且只记录一行数据的变化，修改操作使用的对象
 
+var t=new Date();
+var month=t.getMonth()+1;
+var day=t.getDate();
+var hour=t.getHours();
+var minute=t.getMinutes();
+var seconds=t.getSeconds();
+var showtime=month + "/" + day+ "-" + hour+ ":" + minute+ ":" + seconds;
+
 function updatedb()
 {
 	updateData.updateValues['songnum'] = I;
+	updateData.updateValues['logintime'] = showtime;
 	updateData.condition['name'] = uin;
 	socket.emit('sendDataToServer', updateData);//向服务器发送数据
     updateData.condition = {};//把这个全局变量变成原来的样子
